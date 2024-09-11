@@ -34,7 +34,7 @@ def batalha():
         print("=" * 58)
         print("")
         print(f"Charmander LVL 10  HP: [{"[" * int(inimigohp / 4)}{"-" * int(25 - (inimigohp / 4))}] {inimigohp}%")
-        print(f"Squirtle   LVL 10  HP: [{"[" * int(hp / 4)}{"-" * int(25 - (hp / 4))}] {hp}%")
+        print(f"Squirtle   LVL 10  HP:  {moststatus}  [{"[" * int(hp / 4)}{"-" * int(25 - (hp / 4))}] {hp}%")
         print(f"""
 [1] Tackle
 [2] Water Gun
