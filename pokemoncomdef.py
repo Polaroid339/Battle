@@ -16,7 +16,6 @@ def batalha():
 
     tackle = 10
     watergun = 15
-    growl = 0
     protect = 0
     pocoes = 2
     burn = 0
