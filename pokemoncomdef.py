@@ -2,11 +2,13 @@ import os
 import time
 import random
 
+
 def print_slow(text, delay=0.05):
     for char in text:
         print(char, end='', flush=True)
         time.sleep(delay)
     print()
+
 
 def batalha():
     hp = 100
@@ -32,10 +34,11 @@ def batalha():
         danoinimi = 0
 
         print("")
-    print("="*58)
-    print("")
-    print(f"Charmander LVL 10  HP: [{"["*int(inimigohp/4)}{"-"*int(25-(inimigohp/4))}] {inimigohp}%")
-    print("""                                      ⢀⡀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        print("="*58)
+        print("")
+        print(f"Charmander LVL 10  HP: [{
+              "["*int(inimigohp/4)}{"-"*int(25-(inimigohp/4))}] {inimigohp}%")
+        print("""                                      ⢀⡀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                                 ⠀⠀⠀⠀⠀⡔⠁⠀⠀⠀⠈⠑⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                                 ⠀⠀⠀⠀⣜⠃⠀⠀⠀⢘⢳⢆⠘⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                                 ⠀⠀⢀⠔⠉⠀⠀⠀⠀⣜⠀⢸⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -60,9 +63,10 @@ def batalha():
 ⢰⠀⠀⠀⠀⠇⠀⢀⢿⠀⢀⠇⡐⠀⠈⠀⠈⠐⠠⠤⠤⠤⠀⠀⠀⠀⢨
 ⠀⢓⠤⠤⠊⠀⠀⢸⠀⠣⠀⡰⠁⠀⠀⡀⠀⠀⠀⠸⠀⢰⠁⠐⠂⠈⠁
 ⠀⠀⠑⢀⠀⠀⠀⠈⣄⠖⠉⠑⢄⠠⠊⠀⠢⢄⣠⣃⣀⡆⠀⠀⠀⠀⠀""")
-    print("="*58)
-    print(f"\nSquirtle LVL 8  {moststatus}  HP: [{"["*int(hp/4)}{"-"*int(25-(hp/4))}] {hp}%")
-    print(f"""
+        print("="*58)
+        print(f"\nSquirtle LVL 8  {moststatus}  HP: [{
+              "["*int(hp/4)}{"-"*int(25-(hp/4))}] {hp}%")
+        print(f"""
 [1] Tackle
 [2] Water Gun
 [3] Growl
@@ -72,6 +76,9 @@ def batalha():
 [6] Correr\n""")
 
         opcao = int(input("> Digite a opcao: "))
+        print("")
+        print("="*48)
+        print("")
 
         dano = 0
         danoinimi = 0
@@ -204,7 +211,7 @@ def batalha():
                     tackle -= 5
                     watergun -= 5
                     time.sleep(2)
-            
+
         if burn == 1:
             print_slow("\nSquirtle sofreu dano de queimadura!")
             hp -= 5
@@ -221,7 +228,7 @@ def batalha():
         inimigohp -= dano
         hp -= danoinimi
         os.system('cls')
-        
+
     if hp <= 0 or inimigohp <= 0:
         if inimigohp <= 0:
             print_slow("Charmander foi Derrotado!")
@@ -230,5 +237,6 @@ def batalha():
         elif hp <= 0:
             print_slow("Squirtle foi Derrotado!")
             print_slow("Você perdeu!")
+
 
 batalha()
