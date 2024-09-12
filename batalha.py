@@ -36,11 +36,8 @@ def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int
         print("")
         print("="*67)
         print("")
-        print(f"{inimigo} LVL {inimilvl}  HP: [{
-              "["*int(inimigohp/4)}{"-"*int(25-(inimigohp/4))}][{inimigohp:.2f}]")
-
-        print(f"\n{jogador}  LVL {lvl} {moststatus} HP: [{
-              "["*int(hp/4)}{"-"*int(25-(hp/4))}][{hp:.2f}]\n")
+        print(f"{inimigo} LVL {inimilvl}  HP: [{"["*int(inimigohp/4)}{"-"*int(25-(inimigohp/4))}][{inimigohp:.2f}]")
+        print(f"\n{jogador}  LVL {lvl} {moststatus} HP: [{"["*int(hp/4)}{"-"*int(25-(hp/4))}][{hp:.2f}]\n")
         print("="*67)
         print(f"""
 [1] Ataque 1
