@@ -12,6 +12,7 @@ def print_slow(text, delay=0.05):
 
 def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int):
     hp = 100 + (lvl/2)
+    hpinicial = 100 + (lvl/2)
     inimigohp = 100 + (inimilvl/2)
 
     ataque1 = 10 + (lvl/4)
@@ -20,6 +21,7 @@ def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int
     burn = 0
     moststatus = ""
     danocritico = 10
+    poweratk = 1
 
     while hp > 0 and inimigohp > 0:
         ataque1 += random.randint(1, 5)
@@ -35,10 +37,10 @@ def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int
         print("="*67)
         print("")
         print(f"{inimigo} LVL {inimilvl}  HP: [{
-              "["*int(inimigohp/4)}{"-"*int(25-(inimigohp/4))}] {inimigohp:.2f}")
+              "["*int(inimigohp/4)}{"-"*int(25-(inimigohp/4))}][{inimigohp:.2f}]")
 
         print(f"\n{jogador}  LVL {lvl} {moststatus} HP: [{
-              "["*int(hp/4)}{"-"*int(25-(hp/4))}] {hp:.2f}\n")
+              "["*int(hp/4)}{"-"*int(25-(hp/4))}][{hp:.2f}]\n")
         print("="*67)
         print(f"""
 [1] Ataque 1
@@ -104,7 +106,7 @@ def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int
 
             case 5:
                 if pocoes > 0:
-                    if hp >= 100:
+                    if hp >= hpinicial:
                         print_slow("Sua vida já está cheia!\n")
                         print_slow("...")
                         time.sleep(1)
@@ -129,58 +131,75 @@ def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int
                 time.sleep(1)
                 dano = 0
 
-        atkinimigo = random.randint(1, 3)
+        if poweratk == 1:
+            if proteger == 1:
+                print_slow(f"\n{inimigo} usou Guilhotina")
+                print_slow(f"Mas {jogador} defendeu!")
+                poweratk -= 1
+                time.sleep(2)
+            else:
+                print_slow(f"\n{inimigo} usou Guilhotina, foi um ataque poderoso!")
+                danoinimi = 65
+                poweratk -= 1
+                time.sleep(2)
+        else:
+            atkinimigo = random.randint(1, 4)
 
-        match atkinimigo:
-            case 1:
-                if proteger == 1:
-                    print_slow(f"\n{inimigo} usou Investida")
-                    print_slow(f"Mas {jogador} defendeu!")
-                    time.sleep(2)
-                else:
-                    if inimicrit == 1:
+            match atkinimigo:
+                case 1:
+                    if proteger == 1:
                         print_slow(f"\n{inimigo} usou Investida")
-                        print_slow("Foi um dano crítico!")
-                        danoinimi = (random.randint(20, 23) + danocritico)
+                        print_slow(f"Mas {jogador} defendeu!")
                         time.sleep(2)
                     else:
-                        print_slow(f"\n{inimigo} usou Investida")
-                        danoinimi = random.randint(20, 23)
+                        if inimicrit == 1:
+                            print_slow(f"\n{inimigo} usou Investida")
+                            print_slow("Foi um dano crítico!")
+                            danoinimi = (random.randint(20, 23) + danocritico)
+                            time.sleep(2)
+                        else:
+                            print_slow(f"\n{inimigo} usou Investida")
+                            danoinimi = random.randint(20, 23)
+                            time.sleep(2)
+                case 2:
+                    if proteger == 1:
+                        print_slow(f"\n{inimigo} usou Labaredas")
+                        print_slow("Mas {jogador} defendeu!")
                         time.sleep(2)
-            case 2:
-                if proteger == 1:
-                    print_slow(f"\n{inimigo} usou Labaredas")
-                    print_slow("Mas {jogador} defendeu!")
-                    time.sleep(2)
 
-                else:
-                    if inimicrit == 1:
-                        print_slow(f"\n{inimigo} usou Labaredas")
-                        print_slow("Foi um dano crítico!")
-                        if status == 1:
-                            print_slow(f"\n{jogador} foi queimado!")
-                            burn = 1
-                            danoinimi = (random.randint(13, 20) + danocritico)
-                            time.sleep(2)
                     else:
-                        print_slow(f"\n{inimigo} usou Labaredas")
-                        if status == 1:
-                            print_slow(f"\n{jogador} foi queimado!")
-                            burn = 1
-                            danoinimi = random.randint(13, 20)
-                            time.sleep(2)
-            case 3:
-                if ataque1 <= 5 or ataque2 <= 5:
-                    print_slow(f"\n{inimigo} usou Enfraquecer")
-                    print_slow(f"O ataque de {
-                               jogador} não pode diminuir mais!")
-                    time.sleep(2)
+                        if inimicrit == 1:
+                            print_slow(f"\n{inimigo} usou Labaredas")
+                            print_slow("Foi um dano crítico!")
+                            if status == 1:
+                                print_slow(f"\n{jogador} foi queimado!")
+                                burn = 1
+                                danoinimi = (random.randint(13, 20) + danocritico)
+                                time.sleep(2)
+                        else:
+                            print_slow(f"\n{inimigo} usou Labaredas")
+                            if status == 1:
+                                print_slow(f"\n{jogador} foi queimado!")
+                                burn = 1
+                                danoinimi = random.randint(13, 20)
+                                time.sleep(2)
+                case 3:
+                    if ataque1 <= 5 or ataque2 <= 5:
+                        print_slow(f"\n{inimigo} usou Enfraquecer")
+                        print_slow(f"O ataque de {
+                                jogador} não pode diminuir mais!")
+                        time.sleep(2)
 
-                else:
-                    print_slow(f"\n{inimigo} usou Enfraquecer")
-                    print_slow(f"O ataque de {jogador} diminuiu!")
-                    ataque1 -= 5
-                    ataque2 -= 5
+                    else:
+                        print_slow(f"\n{inimigo} usou Enfraquecer")
+                        print_slow(f"O ataque de {jogador} diminuiu!")
+                        ataque1 -= 5
+                        ataque2 -= 5
+                        time.sleep(2)
+                
+                case 4:
+                    print_slow(f"\n{inimigo} prepara um ataque poderoso...")
+                    poweratk += 1
                     time.sleep(2)
 
         if burn == 1:
@@ -210,4 +229,4 @@ def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int
             print_slow("Você perdeu!")
 
 
-batalha("Victor", "Inimigo", 100, random.randint(0, 100), 5)
+batalha("Victor", "Inimigo", 100, 100, 2)
