@@ -195,6 +195,14 @@ def batalha():
         inimigohp -= dano
         hp -= danoinimi
         os.system('cls')
-    print(hp)
+        
+    if hp <= 0 or inimigohp <= 0:
+        if inimigohp <= 0:
+            print_slow("Charmander foi Derrotado!")
+            print_slow("Você ganhou!")
+
+        elif hp <= 0:
+            print_slow("Squirtle foi Derrotado!")
+            print_slow("Você perdeu!")
 
 batalha()
