@@ -11,35 +11,35 @@ def print_slow(text, delay=0.05):
 
 
 def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int):
-    hp = 100 + (lvl/4)
-    inimigohp = 100 + (inimilvl/4)
+    hp = 100 + (lvl/2)
+    inimigohp = 100 + (inimilvl/2)
 
-    ataque1 = 10 + (lvl/8)
-    ataque2 = 15 + (lvl/8)
+    ataque1 = 10 + (lvl/4)
+    ataque2 = 15 + (lvl/4)
     proteger = 0
     burn = 0
     moststatus = ""
     danocritico = 10
 
     while hp > 0 and inimigohp > 0:
-        ataque1 += random.randint(1, 7)
-        ataque2 += random.randint(1, 8)
-        critico = random.randint(1, 13)
-        inimicrit = random.randint(1, 13)
+        ataque1 += random.randint(1, 5)
+        ataque2 += random.randint(1, 5)
+        critico = random.randint(1, 10)
+        inimicrit = random.randint(1, 10)
         status = random.randint(1, 7)
         atkinimigo = 0
         dano = 0
         danoinimi = 0
 
         print("")
-        print("="*60)
+        print("="*67)
         print("")
         print(f"{inimigo} LVL {inimilvl}  HP: [{
-              "["*int(inimigohp/4)}{"-"*int(25-(inimigohp/4))}] {inimigohp}")
+              "["*int(inimigohp/4)}{"-"*int(25-(inimigohp/4))}] {inimigohp:.2f}")
 
         print(f"\n{jogador}  LVL {lvl} {moststatus} HP: [{
-              "["*int(hp/4)}{"-"*int(25-(hp/4))}] {hp}\n")
-        print("="*60)
+              "["*int(hp/4)}{"-"*int(25-(hp/4))}] {hp:.2f}\n")
+        print("="*67)
         print(f"""
 [1] Ataque 1
 [2] Ataque 2
@@ -210,4 +210,4 @@ def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int
             print_slow("Você perdeu!")
 
 
-batalha("Victor", "Inimigo", 100, 100, 5)
+batalha("Victor", "Inimigo", 100, random.randint(0, 100), 5)
