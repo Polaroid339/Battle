@@ -21,7 +21,7 @@ def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int
     burn = 0
     moststatus = ""
     danocritico = 10
-    poweratk = 1
+    poweratk = 0
 
     while hp > 0 and inimigohp > 0:
         ataque1 += random.randint(1, 5)
