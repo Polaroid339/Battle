@@ -2,6 +2,9 @@ import os
 import time
 import random
 
+level = 1
+lvlpoints: int = 0
+
 
 def print_slow(text, delay=0.05):
     for char in text:
@@ -10,7 +13,7 @@ def print_slow(text, delay=0.05):
     print()
 
 
-def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int):
+def batalha(jogador: str, inimigo: str, lvl, inimilvl: float, pocoes: int):
 
     hp = 100 + (lvl/2)
     hpinicial = 100 + (lvl/2)
@@ -27,6 +30,7 @@ def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int
 
     while hp > 0 and inimigohp > 0:
 
+        os.system('cls')
         ataque1 += random.randint(1, 5)
         ataque2 += random.randint(1, 5)
         critico = random.randint(1, 10)
@@ -38,9 +42,9 @@ def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int
 
         print("\n", "="*68, "\n")
         print(f" {inimigo} LVL {inimilvl}  HP: [{
-              "["*int(inimigohp/4)}{"-"*int((inimigohpini/4)-(inimigohp/4))}][{inimigohp:.2f}]")
+            "["*int(inimigohp/4)}{"-"*int((inimigohpini/4)-(inimigohp/4))}][{int(inimigohp)}]")
         print(f"\n {jogador}  LVL {lvl} {moststatus} HP: [{
-              "["*int(hp/4)}{"-"*int((hpinicial/4)-(hp/4))}][{hp:.2f}]")
+              "["*int(hp/4)}{"-"*int((hpinicial/4)-(hp/4))}][{int(hp)}]")
         print("\n", "="*68)
         print(f"""
 [1] Ataque Rápido
@@ -154,7 +158,7 @@ def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int
                         if inimicrit == 1:
                             print_slow(f"\n{inimigo} usou Investida")
                             print_slow("Foi um dano crítico!")
-                            danoinimi = random.randint(20, 23) + danocritico
+                            danoinimi = 15 + (inimilvl/4) + danocritico
                             time.sleep(2)
                         else:
                             print_slow(f"\n{inimigo} usou Investida")
@@ -170,22 +174,22 @@ def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int
                         if inimicrit == 1:
                             print_slow(f"\n{inimigo} usou Labaredas")
                             print_slow("Foi um dano crítico!")
+                            danoinimi = 20 + (inimilvl/4) + danocritico
                             time.sleep(2)
                             if status == 1:
                                 print_slow(f"\n{jogador} foi queimado!")
                                 burn = 1
-                                danoinimi = (random.randint(
-                                    13, 20) + danocritico)
                                 time.sleep(2)
                         else:
                             print_slow(f"\n{inimigo} usou Labaredas")
+                            danoinimi = 20 + (inimilvl/4)
+                            time.sleep(2)
                             if status == 1:
                                 print_slow(f"\n{jogador} foi queimado!")
                                 burn = 1
-                                danoinimi = random.randint(13, 20)
                                 time.sleep(2)
                 case 3:
-                    if ataque1 <= 5 or ataque2 <= 5:
+                    if ataque1 <= 10 or ataque2 <= 10:
                         print_slow(f"\n{inimigo} usou Enfraquecer")
                         print_slow(f"O ataque de {
                             jogador} não pode diminuir mais!")
@@ -223,11 +227,21 @@ def batalha(jogador: str, inimigo: str, lvl: float, inimilvl: float, pocoes: int
     if hp <= 0 or inimigohp <= 0:
         if inimigohp <= 0:
             print_slow(f"{inimigo} foi Derrotado!")
-            print_slow("Você ganhou!")
+            print_slow(f"Você ganhou! {int(inimigohpini/4)} pontos de EXP!")
+            global level
+            if level < 100:
+                global lvlpoints
+                lvlpoints += int(inimigohpini/4)
+                if lvlpoints >= (hpinicial*2):
+                    print_slow(f"O seu nível aumentou! LVL {level}")
+                    level += 1
+                    lvlpoints = 0
+            else:
+                print("level maximo")
 
         elif hp <= 0:
             print_slow(f"{jogador} foi Derrotado!")
             print_slow("Você perdeu!")
 
 
-batalha("Victor", "Inimigo", 100, 100, 2)
+batalha("Victor", "Inimigo", level, random.randint(1, 100), 2)
