@@ -237,7 +237,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl: float, pocoes: int):
                     level += 1
                     lvlpoints = 0
             else:
-                print("level maximo")
+                print("Level máximo!")
 
         elif hp <= 0:
             print_slow(f"{jogador} foi Derrotado!")
