@@ -8,6 +8,8 @@ lvlpoints: int = 0
 
 def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
 
+    os.system('cls')
+
     def print_slow(text, delay=0.05):
         for char in text:
             print(char, end='', flush=True)
