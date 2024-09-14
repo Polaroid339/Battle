@@ -6,7 +6,7 @@ level: int = 1
 lvlpoints: int = 0
 
 
-def batalha(jogador: str, inimigo: str, lvl, inimilvl: float, pocoes: int):
+def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
 
     def print_slow(text, delay=0.05):
         for char in text:
@@ -127,7 +127,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl: float, pocoes: int):
                             time.sleep(1)
                         else:
                             print_slow(f"{jogador} usou uma Poção\n")
-                            hp += 20
+                            hp += 25
                             pocoes -= 1
                             burn = 0
                             moststatus = ""
@@ -154,7 +154,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl: float, pocoes: int):
                 time.sleep(2)
             else:
                 print_slow(
-                    f"\n{inimigo} usou Guilhotina, foi um Ataque Pesado!")
+                    f"\n{inimigo} usou Guilhotina, foi um ataque poderoso!")
                 danoinimi = 65
                 poweratk -= 1
                 time.sleep(2)
@@ -216,7 +216,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl: float, pocoes: int):
                         time.sleep(2)
 
                 case 4:
-                    print_slow(f"\n{inimigo} prepara um Ataque Pesado...")
+                    print_slow(f"\n{inimigo} prepara um ataque poderoso...")
                     poweratk += 1
                     time.sleep(2)
 
@@ -256,6 +256,3 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl: float, pocoes: int):
         elif hp <= 0:
             print_slow(f"{jogador} foi Derrotado!")
             print_slow("Você perdeu!")
-
-
-batalha("Victor", "Inimigo", level, random.randint(1, 100), 2)
