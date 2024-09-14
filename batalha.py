@@ -60,7 +60,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
 [5] Poções ({pocoes})
 [6] Correr\n""")
 
-        opcao = int(input("=> Digite a opcao: "))
+        opcao = int(input("=> Digite a opção: "))
         print("")
         print("="*48, "\n")
 
@@ -250,11 +250,11 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
 
             if level < 100:
                 global lvlpoints
-                lvlpoints += int(inimigohpini/4)
-                if lvlpoints >= (hpinicial*2):
+                lvlpoints += int(inimilvl*100)
+                if lvlpoints >= (lvl*100):
                     print_slow(f"O seu nível aumentou! LVL {level}")
                     level += 1
-                    lvlpoints = 0
+                    lvlpoints = lvlpoints - (lvl*100)
             else:
                 print("Level máximo!")
 
