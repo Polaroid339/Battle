@@ -42,24 +42,27 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
         dano = 0
         danoinimi = 0
 
-        print("\n", "="*68, "\n")
-        print(f" {inimigo} LVL {inimilvl}  HP: [{
+        print("="*66)
+        print(f"\n{inimigo} LVL {inimilvl}  HP: [{
               "["*int(inimigohp/4)}", end='')
-        print(f"{"-"*int((inimigohpini/4)-(inimigohp/4))}][{int(inimigohp)}]")
-        print(f"\n {jogador}  LVL {lvl} {moststatus} HP: [{
-              "["*int(hp/4)}{"-"*int((hpinicial/4)-(hp/4))}][{int(hp)}]")
-        print("\n", "="*68)
+        print(f"{"-"*int((inimigohpini/4)-(inimigohp/4))
+                 }][{int((inimigohp/inimigohpini)*100)}%]\n")
+        print("="*66)
+        print(f"\n{jogador}  LVL {lvl} {
+              moststatus} HP: [{"["*int(hp/4)}", end='')
+        print(f"{"-"*int((hpinicial/4)-(hp/4))}][{int((hp/hpinicial)*100)}%]")
         print(f"""
-[1] Ataque Rápido
-[2] Ataque Pesado
-[3] Fortalecer
-[4] Proteger
+[1] Ataque Rápido --- Dano Base [{int(ataque1)}]
+[2] Ataque Pesado --- Dano Base [{int(ataque2)}]; 1 turno de cooldown
+[3] Fortalecer ------ Aumenta em 10 os ataques
+[4] Proteger -------- Protege por 1 turno
 
 [5] Poções ({pocoes})
 [6] Correr\n""")
 
-        opcao = int(input("> Digite a opcao: "))
-        print("\n", "="*48, "\n")
+        opcao = int(input("=> Digite a opcao: "))
+        print("")
+        print("="*48, "\n")
 
         dano = 0
         danoinimi = 0
@@ -213,8 +216,8 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                     else:
                         print_slow(f"\n{inimigo} usou Enfraquecer")
                         print_slow(f"O ataque de {jogador} diminuiu!")
-                        ataque1 -= 5
-                        ataque2 -= 5
+                        ataque1 -= 10
+                        ataque2 -= 10
                         time.sleep(2)
 
                 case 4:
