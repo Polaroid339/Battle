@@ -2,18 +2,17 @@ import os
 import time
 import random
 
-level = 1
+level: int = 1
 lvlpoints: int = 0
 
 
-def print_slow(text, delay=0.05):
-    for char in text:
-        print(char, end='', flush=True)
-        time.sleep(delay)
-    print()
-
-
 def batalha(jogador: str, inimigo: str, lvl, inimilvl: float, pocoes: int):
+
+    def print_slow(text, delay=0.05):
+        for char in text:
+            print(char, end='', flush=True)
+            time.sleep(delay)
+        print()
 
     hp = 100 + (lvl/2)
     hpinicial = 100 + (lvl/2)
@@ -21,12 +20,13 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl: float, pocoes: int):
     inimigohpini = 100 + (inimilvl/2)
 
     ataque1 = 10 + (lvl/4)
-    ataque2 = 15 + (lvl/4)
+    ataque2 = 35 + (lvl/4)
     proteger = 0
     burn = 0
     moststatus = ""
-    danocritico = 10
+    danocritico = 30
     poweratk = 0
+    invespes = 0
 
     while hp > 0 and inimigohp > 0:
 
@@ -42,13 +42,14 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl: float, pocoes: int):
 
         print("\n", "="*68, "\n")
         print(f" {inimigo} LVL {inimilvl}  HP: [{
-            "["*int(inimigohp/4)}{"-"*int((inimigohpini/4)-(inimigohp/4))}][{int(inimigohp)}]")
+              "["*int(inimigohp/4)}", end='')
+        print(f"{"-"*int((inimigohpini/4)-(inimigohp/4))}][{int(inimigohp)}]")
         print(f"\n {jogador}  LVL {lvl} {moststatus} HP: [{
               "["*int(hp/4)}{"-"*int((hpinicial/4)-(hp/4))}][{int(hp)}]")
         print("\n", "="*68)
         print(f"""
 [1] Ataque Rápido
-[2] Investida Pesada
+[2] Ataque Pesado
 [3] Fortalecer
 [4] Proteger
 
@@ -61,77 +62,89 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl: float, pocoes: int):
         dano = 0
         danoinimi = 0
 
-        match opcao:
-            case 1:
-                if critico == 1:
-                    print_slow(f"{jogador} usou Ataque Rápido")
-                    print_slow("Foi um dano crítico!\n")
-                    dano = ataque1 + danocritico
-                    print_slow("...")
-                    time.sleep(1)
-                else:
-                    print_slow(f"{jogador} usou Ataque Rápido\n")
-                    dano = ataque1
-                    print_slow("...")
-                    time.sleep(1)
+        if invespes == 1:
+            print_slow(f"{jogador} precisa recuperar o folego...\n")
+            invespes -= 1
+            print_slow("...")
+            time.sleep(1)
 
-            case 2:
-                if critico == 1:
-                    print_slow(f"{jogador} usou Investida Pesada")
-                    print_slow("Foi um dano crítico!\n")
-                    dano = ataque2 + danocritico
-                    print_slow("...")
-                    time.sleep(1)
-                else:
-                    print_slow(f"{jogador} usou Investida Pesada\n")
-                    dano = ataque2
-                    print_slow("...")
-                    time.sleep(1)
-            case 3:
-                print_slow(f"{jogador} usou Fortalecer")
-                print_slow(f"O ataque de {jogador} aumentou!\n")
-                ataque1 += 10
-                ataque2 += 10
-                print_slow("...")
-                time.sleep(1)
-
-            case 4:
-                print_slow(f"{jogador} usou Proteger\n")
-                print_slow("...")
-                time.sleep(1)
-                if proteger > 0:
-                    print_slow("Mas falha!\n")
-                    print_slow("...")
-                    time.sleep(1)
-                else:
-                    proteger += 1
-
-            case 5:
-                if pocoes > 0:
-                    if hp >= hpinicial:
-                        print_slow("Sua vida já está cheia!\n")
+        else:
+            match opcao:
+                case 1:
+                    if critico == 1:
+                        dano = ataque1 + danocritico
+                        print_slow(f"{jogador} usou Ataque Rápido")
+                        print_slow("Foi um dano crítico!\n")
                         print_slow("...")
                         time.sleep(1)
                     else:
-                        print_slow(f"{jogador} usou uma Poção\n")
-                        hp += 20
-                        pocoes -= 1
-                        burn = 0
-                        moststatus = ""
+                        print_slow(f"{jogador} usou Ataque Rápido\n")
+                        dano = ataque1
                         print_slow("...")
                         time.sleep(1)
-                else:
-                    print_slow("Você não tem poções para usar!\n")
+
+                case 2:
+                    if critico == 1:
+                        print_slow(f"{jogador} usou Ataque Pesado")
+                        print_slow("Foi um ataque poderoso!")
+                        print_slow("Foi um dano crítico!\n")
+                        dano = ataque2 + danocritico
+                        invespes += 1
+                        print_slow("...")
+                        time.sleep(1)
+                    else:
+                        print_slow(f"{jogador} usou Ataque Pesado")
+                        print_slow("Foi um ataque poderoso!\n")
+                        dano = ataque2
+                        invespes += 1
+                        print_slow("...")
+                        time.sleep(1)
+
+                case 3:
+                    print_slow(f"{jogador} usou Fortalecer")
+                    print_slow(f"O ataque de {jogador} aumentou!\n")
+                    ataque1 += 10
+                    ataque2 += 10
                     print_slow("...")
                     time.sleep(1)
-            case 6:
-                print_slow("Você escapou da batalha!")
-                break
-            case _:
-                print_slow("Comando invalido\n")
-                print_slow("...")
-                time.sleep(1)
-                dano = 0
+
+                case 4:
+                    print_slow(f"{jogador} usou Proteger\n")
+                    print_slow("...")
+                    time.sleep(1)
+                    if proteger > 0:
+                        print_slow("Mas falha!\n")
+                        print_slow("...")
+                        time.sleep(1)
+                    else:
+                        proteger += 1
+
+                case 5:
+                    if pocoes > 0:
+                        if hp >= hpinicial:
+                            print_slow("Sua vida já está cheia!\n")
+                            print_slow("...")
+                            time.sleep(1)
+                        else:
+                            print_slow(f"{jogador} usou uma Poção\n")
+                            hp += 20
+                            pocoes -= 1
+                            burn = 0
+                            moststatus = ""
+                            print_slow("...")
+                            time.sleep(1)
+                    else:
+                        print_slow("Você não tem poções para usar!\n")
+                        print_slow("...")
+                        time.sleep(1)
+                case 6:
+                    print_slow("Você escapou da batalha!")
+                    break
+                case _:
+                    print_slow("Comando invalido\n")
+                    print_slow("...")
+                    time.sleep(1)
+                    dano = 0
 
         if poweratk == 1:
             if proteger == 1:
@@ -141,7 +154,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl: float, pocoes: int):
                 time.sleep(2)
             else:
                 print_slow(
-                    f"\n{inimigo} usou Guilhotina, foi um ataque poderoso!")
+                    f"\n{inimigo} usou Guilhotina, foi um Ataque Pesado!")
                 danoinimi = 65
                 poweratk -= 1
                 time.sleep(2)
@@ -162,7 +175,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl: float, pocoes: int):
                             time.sleep(2)
                         else:
                             print_slow(f"\n{inimigo} usou Investida")
-                            danoinimi = random.randint(20, 23)
+                            danoinimi = 15 + (inimilvl/4)
                             time.sleep(2)
                 case 2:
                     if proteger == 1:
@@ -203,13 +216,13 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl: float, pocoes: int):
                         time.sleep(2)
 
                 case 4:
-                    print_slow(f"\n{inimigo} prepara um ataque poderoso...")
+                    print_slow(f"\n{inimigo} prepara um Ataque Pesado...")
                     poweratk += 1
                     time.sleep(2)
 
         if burn == 1:
             print_slow(f"\n{jogador} sofreu dano de queimadura!")
-            hp -= 5
+            hp -= 10
             time.sleep(2)
 
         if burn == 1:
@@ -229,6 +242,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl: float, pocoes: int):
             print_slow(f"{inimigo} foi Derrotado!")
             print_slow(f"Você ganhou! {int(inimigohpini/4)} pontos de EXP!")
             global level
+
             if level < 100:
                 global lvlpoints
                 lvlpoints += int(inimigohpini/4)
