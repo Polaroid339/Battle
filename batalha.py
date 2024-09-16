@@ -306,4 +306,3 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
         elif hp <= 0:
             print_slow(f"{jogador} foi Derrotado!")
             print_slow("Você perdeu!")
-            
