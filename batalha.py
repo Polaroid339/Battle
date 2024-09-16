@@ -21,8 +21,8 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
     inimigohp = 100 + (inimilvl/2)
     inimigohpini = 100 + (inimilvl/2)
 
-    ataque1 = 10 + (lvl/4)
-    ataque2 = 35 + (lvl/4)
+    ataque1 = 10 + (lvl/3)
+    ataque2 = 35 + (lvl/3)
     proteger = 0
     burn = 0
     moststatus = ""
@@ -43,13 +43,10 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
         danoinimi = 0
 
         print("="*66)
-        print(f"\n{inimigo} LVL {inimilvl}  HP: [{
-              "["*int(inimigohp/4)}", end='')
-        print(f"{"-"*int((inimigohpini/4)-(inimigohp/4))
-                 }][{int((inimigohp/inimigohpini)*100)}%]\n")
+        print(f"\n{inimigo} LVL {inimilvl}  HP: [{"["*int(inimigohp/4)}", end='')
+        print(f"{"-"*int((inimigohpini/4)-(inimigohp/4))}][{int((inimigohp/inimigohpini)*100)}%]\n")
         print("="*66)
-        print(f"\n{jogador}  LVL {lvl} {
-              moststatus} HP: [{"["*int(hp/4)}", end='')
+        print(f"\n{jogador}  LVL {lvl} {moststatus} HP: [{"["*int(hp/4)}", end='')
         print(f"{"-"*int((hpinicial/4)-(hp/4))}][{int((hp/hpinicial)*100)}%]")
         print(f"""
 [1] Ataque Rápido --- Dano Base [{int(ataque1)}]
@@ -252,8 +249,8 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                 global lvlpoints
                 lvlpoints += int(inimilvl*100)
                 if lvlpoints >= (lvl*100):
-                    print_slow(f"O seu nível aumentou! LVL {level}")
                     level += 1
+                    print_slow(f"O seu nível aumentou! LVL {level}")
                     lvlpoints = lvlpoints - (lvl*100)
             else:
                 print("Level máximo!")
