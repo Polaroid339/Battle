@@ -24,6 +24,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
     ataque1 = 10 + (lvl/3)
     ataque2 = 35 + (lvl/3)
     proteger = 0
+    esquiva = 0
     burn = 0
     moststatus = ""
     danocritico = 30
@@ -38,6 +39,8 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
         critico = random.randint(1, 10)
         inimicrit = random.randint(1, 10)
         status = random.randint(1, 7)
+        chanesquiva = random.randint(1, 20)
+        inimichanceesqui = random.randint(1, 20)
         atkinimigo = 0
         dano = 0
         danoinimi = 0
@@ -73,34 +76,52 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
         else:
             match opcao:
                 case 1:
-                    if critico == 1:
-                        dano = ataque1 + danocritico
+                    if inimichanceesqui == 1:
                         print_slow(f"{jogador} usou Ataque Rápido")
-                        print_slow("Foi um dano crítico!\n")
-                        print_slow("...")
-                        time.sleep(1)
-                    else:
-                        print_slow(f"{jogador} usou Ataque Rápido\n")
-                        dano = ataque1
+                        print_slow(f"Mas {inimigo} Esquiva!\n")
+                        dano = 0
                         print_slow("...")
                         time.sleep(1)
 
-                case 2:
-                    if critico == 1:
-                        print_slow(f"{jogador} usou Ataque Pesado")
-                        print_slow("Foi um ataque poderoso!")
-                        print_slow("Foi um dano crítico!\n")
-                        dano = ataque2 + danocritico
-                        invespes += 1
-                        print_slow("...")
-                        time.sleep(1)
                     else:
+                        if critico == 1:
+                            dano = ataque1 + danocritico
+                            print_slow(f"{jogador} usou Ataque Rápido")
+                            print_slow("Foi um dano crítico!\n")
+                            print_slow("...")
+                            time.sleep(1)
+
+                        else:
+                            print_slow(f"{jogador} usou Ataque Rápido\n")
+                            dano = ataque1
+                            print_slow("...")
+                            time.sleep(1)
+
+                case 2:
+                    if inimichanceesqui == 1:
                         print_slow(f"{jogador} usou Ataque Pesado")
-                        print_slow("Foi um ataque poderoso!\n")
-                        dano = ataque2
-                        invespes += 1
+                        print_slow(f"Mas {inimigo} Esquiva!\n")
+                        dano = 0
                         print_slow("...")
                         time.sleep(1)
+
+                    else:
+                        if critico == 1:
+                            print_slow(f"{jogador} usou Ataque Pesado")
+                            print_slow("Foi um ataque poderoso!")
+                            print_slow("Foi um dano crítico!\n")
+                            dano = ataque2 + danocritico
+                            invespes += 1
+                            print_slow("...")
+                            time.sleep(1)
+
+                        else:
+                            print_slow(f"{jogador} usou Ataque Pesado")
+                            print_slow("Foi um ataque poderoso!\n")
+                            dano = ataque2
+                            invespes += 1
+                            print_slow("...")
+                            time.sleep(1)
 
                 case 3:
                     print_slow(f"{jogador} usou Fortalecer")
@@ -114,10 +135,12 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                     print_slow(f"{jogador} usou Proteger\n")
                     print_slow("...")
                     time.sleep(1)
+
                     if proteger > 0:
                         print_slow("Mas falha!\n")
                         print_slow("...")
                         time.sleep(1)
+
                     else:
                         proteger += 1
 
@@ -127,6 +150,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                             print_slow("Sua vida já está cheia!\n")
                             print_slow("...")
                             time.sleep(1)
+
                         else:
                             print_slow(f"{jogador} usou uma Poção\n")
                             hp += 25
@@ -135,13 +159,16 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                             moststatus = ""
                             print_slow("...")
                             time.sleep(1)
+
                     else:
                         print_slow("Você não tem poções para usar!\n")
                         print_slow("...")
                         time.sleep(1)
+
                 case 6:
                     print_slow("Você escapou da batalha!")
                     break
+                    
                 case _:
                     print_slow("Comando invalido\n")
                     print_slow("...")
@@ -154,6 +181,13 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                 print_slow(f"Mas {jogador} defendeu!")
                 poweratk -= 1
                 time.sleep(2)
+
+            elif chanesquiva == 1:
+                print_slow(f"\n{inimigo} usou Guilhotina")
+                print_slow(f"{jogador} se esquiva do ataque...\n")
+                print_slow("...")
+                time.sleep(2)
+
             else:
                 print_slow(
                     f"\n{inimigo} usou Guilhotina, foi um ataque poderoso!")
@@ -169,6 +203,13 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                         print_slow(f"\n{inimigo} usou Investida")
                         print_slow(f"Mas {jogador} defendeu!")
                         time.sleep(2)
+
+                    elif chanesquiva == 1:
+                        print_slow(f"\n{inimigo} usou Investida")
+                        print_slow(f"{jogador} se esquiva do ataque...\n")
+                        print_slow("...")
+                        time.sleep(2)
+                    
                     else:
                         if inimicrit == 1:
                             print_slow(f"\n{inimigo} usou Investida")
@@ -183,6 +224,12 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                     if proteger == 1:
                         print_slow(f"\n{inimigo} usou Labaredas")
                         print_slow("Mas {jogador} defendeu!")
+                        time.sleep(2)
+
+                    elif chanesquiva == 1:
+                        print_slow(f"\n{inimigo} usou Labaredas")
+                        print_slow(f"{jogador} se esquiva do ataque...\n")
+                        print_slow("...")
                         time.sleep(2)
 
                     else:
@@ -203,6 +250,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                                 print_slow(f"\n{jogador} foi queimado!")
                                 burn = 1
                                 time.sleep(2)
+                                
                 case 3:
                     if ataque1 <= 10 or ataque2 <= 10:
                         print_slow(f"\n{inimigo} usou Enfraquecer")
