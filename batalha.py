@@ -21,8 +21,8 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
     inimigohp = 100 + (inimilvl/2)
     inimigohpini = 100 + (inimilvl/2)
 
-    ataque1 = 10 + (lvl/3)
-    ataque2 = 35 + (lvl/3)
+    ataque1 = 10 + (lvl/4)
+    ataque2 = 35 + (lvl/4)
     proteger = 0
     esquiva = 0
     burn = 0
@@ -250,7 +250,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                                 print_slow(f"\n{jogador} foi queimado!")
                                 burn = 1
                                 time.sleep(2)
-                                
+
                 case 3:
                     if ataque1 <= 10 or ataque2 <= 10:
                         print_slow(f"\n{inimigo} usou Enfraquecer")
@@ -306,3 +306,4 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
         elif hp <= 0:
             print_slow(f"{jogador} foi Derrotado!")
             print_slow("Você perdeu!")
+            
