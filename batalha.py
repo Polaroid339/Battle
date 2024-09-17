@@ -24,7 +24,6 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
     ataque1 = 10 + (lvl/4)
     ataque2 = 35 + (lvl/4)
     proteger = 0
-    esquiva = 0
     burn = 0
     moststatus = ""
     danocritico = 30
@@ -39,17 +38,20 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
         critico = random.randint(1, 10)
         inimicrit = random.randint(1, 10)
         status = random.randint(1, 7)
-        chanesquiva = random.randint(1, 20)
-        inimichanceesqui = random.randint(1, 20)
+        esquiva = random.randint(1, 20)
+        inimiesquiva = random.randint(1, 20)
         atkinimigo = 0
         dano = 0
         danoinimi = 0
 
         print("="*66)
-        print(f"\n{inimigo} LVL {inimilvl}  HP: [{"["*int(inimigohp/4)}", end='')
-        print(f"{"-"*int((inimigohpini/4)-(inimigohp/4))}][{int((inimigohp/inimigohpini)*100)}%]\n")
+        print(f"\n{inimigo} LVL {inimilvl}  HP: [{
+              "["*int(inimigohp/4)}", end='')
+        print(f"{"-"*int((inimigohpini/4)-(inimigohp/4))
+                 }][{int((inimigohp/inimigohpini)*100)}%]\n")
         print("="*66)
-        print(f"\n{jogador}  LVL {lvl} {moststatus} HP: [{"["*int(hp/4)}", end='')
+        print(f"\n{jogador}  LVL {lvl} {
+              moststatus} HP: [{"["*int(hp/4)}", end='')
         print(f"{"-"*int((hpinicial/4)-(hp/4))}][{int((hp/hpinicial)*100)}%]")
         print(f"""
 [1] Ataque Rápido --- Dano Base [{int(ataque1)}]
@@ -76,7 +78,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
         else:
             match opcao:
                 case 1:
-                    if inimichanceesqui == 1:
+                    if inimiesquiva == 1:
                         print_slow(f"{jogador} usou Ataque Rápido")
                         print_slow(f"Mas {inimigo} Esquiva!\n")
                         dano = 0
@@ -98,7 +100,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                             time.sleep(1)
 
                 case 2:
-                    if inimichanceesqui == 1:
+                    if inimiesquiva == 1:
                         print_slow(f"{jogador} usou Ataque Pesado")
                         print_slow(f"Mas {inimigo} Esquiva!\n")
                         dano = 0
@@ -168,7 +170,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                 case 6:
                     print_slow("Você escapou da batalha!")
                     break
-                    
+
                 case _:
                     print_slow("Comando invalido\n")
                     print_slow("...")
@@ -176,16 +178,16 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                     dano = 0
 
         if poweratk == 1:
-            if proteger == 1:
-                print_slow(f"\n{inimigo} usou Guilhotina")
-                print_slow(f"Mas {jogador} defendeu!")
-                poweratk -= 1
-                time.sleep(2)
-
-            elif chanesquiva == 1:
+            if esquiva == 1:
                 print_slow(f"\n{inimigo} usou Guilhotina")
                 print_slow(f"{jogador} se esquiva do ataque...\n")
                 print_slow("...")
+                time.sleep(2)
+
+            elif proteger == 1:
+                print_slow(f"\n{inimigo} usou Guilhotina")
+                print_slow(f"Mas {jogador} defendeu!")
+                poweratk -= 1
                 time.sleep(2)
 
             else:
@@ -199,17 +201,17 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
 
             match atkinimigo:
                 case 1:
-                    if proteger == 1:
-                        print_slow(f"\n{inimigo} usou Investida")
-                        print_slow(f"Mas {jogador} defendeu!")
-                        time.sleep(2)
-
-                    elif chanesquiva == 1:
+                    if esquiva == 1:
                         print_slow(f"\n{inimigo} usou Investida")
                         print_slow(f"{jogador} se esquiva do ataque...\n")
                         print_slow("...")
                         time.sleep(2)
-                    
+
+                    elif proteger == 1:
+                        print_slow(f"\n{inimigo} usou Investida")
+                        print_slow(f"Mas {jogador} defendeu!")
+                        time.sleep(2)
+
                     else:
                         if inimicrit == 1:
                             print_slow(f"\n{inimigo} usou Investida")
@@ -221,15 +223,15 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                             danoinimi = 15 + (inimilvl/4)
                             time.sleep(2)
                 case 2:
-                    if proteger == 1:
-                        print_slow(f"\n{inimigo} usou Labaredas")
-                        print_slow("Mas {jogador} defendeu!")
-                        time.sleep(2)
-
-                    elif chanesquiva == 1:
+                    if esquiva == 1:
                         print_slow(f"\n{inimigo} usou Labaredas")
                         print_slow(f"{jogador} se esquiva do ataque...\n")
                         print_slow("...")
+                        time.sleep(2)
+
+                    elif proteger == 1:
+                        print_slow(f"\n{inimigo} usou Labaredas")
+                        print_slow("Mas {jogador} defendeu!")
                         time.sleep(2)
 
                     else:
