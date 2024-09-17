@@ -33,8 +33,6 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
     while hp > 0 and inimigohp > 0:
 
         os.system('cls')
-        ataque1 += random.randint(1, 5)
-        ataque2 += random.randint(1, 5)
         critico = random.randint(1, 10)
         inimicrit = random.randint(1, 10)
         status = random.randint(1, 7)
