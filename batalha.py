@@ -28,7 +28,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
     moststatus = ""
     danocritico = 30
     poweratk = 0
-    invespes = 0
+    cooldown = 0
 
     while hp > 0 and inimigohp > 0:
 
@@ -67,9 +67,9 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
         dano = 0
         danoinimi = 0
 
-        if invespes == 1:
+        if cooldown == 1:
             print_slow(f"{jogador} precisa recuperar o folego...\n")
-            invespes -= 1
+            cooldown -= 1
             print_slow("...")
             time.sleep(1)
 
@@ -111,7 +111,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                             print_slow("Foi um ataque poderoso!")
                             print_slow("Foi um dano crítico!\n")
                             dano = ataque2 + danocritico
-                            invespes += 1
+                            cooldown += 1
                             print_slow("...")
                             time.sleep(1)
 
@@ -119,7 +119,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                             print_slow(f"{jogador} usou Ataque Pesado")
                             print_slow("Foi um ataque poderoso!\n")
                             dano = ataque2
-                            invespes += 1
+                            cooldown += 1
                             print_slow("...")
                             time.sleep(1)
 
