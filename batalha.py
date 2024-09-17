@@ -1,3 +1,5 @@
+#Versão 1.0 Made by Victor
+
 import os
 import time
 import random
