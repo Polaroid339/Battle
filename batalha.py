@@ -296,7 +296,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
     if hp <= 0 or inimigohp <= 0:
         if inimigohp <= 0:
             print_slow(f"{inimigo} foi Derrotado!")
-            print_slow(f"Você ganhou! {int(inimigohpini/4)} pontos de EXP!")
+            print_slow(f"Você ganhou! {int(inimilvl*100)} pontos de EXP!")
             global level
 
             if level < 100:
