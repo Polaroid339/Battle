@@ -1,5 +1,3 @@
-#Versão 1.0 Made by Victor
-
 import os
 import time
 import random
@@ -35,14 +33,6 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
     while hp > 0 and inimigohp > 0:
 
         os.system('cls')
-        critico = random.randint(1, 10)
-        inimicrit = random.randint(1, 10)
-        status = random.randint(1, 7)
-        esquiva = random.randint(1, 20)
-        inimiesquiva = random.randint(1, 20)
-        atkinimigo = 0
-        dano = 0
-        danoinimi = 0
 
         print("="*66)
         print(f"\n{inimigo} LVL {inimilvl}  HP: [{
@@ -62,9 +52,26 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
 [5] Poções ({pocoes})
 [6] Correr\n""")
 
-        opcao = int(input("=> Digite a opção: "))
-        print("")
-        print("="*48, "\n")
+        critico = random.randint(1, 10)
+        inimicrit = random.randint(1, 10)
+        status = random.randint(1, 7)
+        esquiva = random.randint(1, 20)
+        inimiesquiva = random.randint(1, 20)
+        atkinimigo = 0
+        dano = 0
+        danoinimi = 0
+
+        while True:
+            try:
+                opcao = int(input("> Digite a opção: "))
+                if 1 <= opcao <= 6:
+                    print("")
+                    print("="*48, "\n")
+                    break
+                else:
+                    print_slow("\nOpção inválida. Digite um número válido.\n")
+            except ValueError:
+                print_slow("\nComando invalido. Digite um número válido.\n")
 
         dano = 0
         danoinimi = 0
@@ -171,12 +178,6 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                     print_slow("Você escapou da batalha!")
                     break
 
-                case _:
-                    print_slow("Comando invalido\n")
-                    print_slow("...")
-                    time.sleep(1)
-                    dano = 0
-
         if poweratk == 1:
             if esquiva == 1:
                 print_slow(f"\n{inimigo} usou Guilhotina")
@@ -254,7 +255,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                                 time.sleep(2)
 
                 case 3:
-                    if ataque1 <= 10 or ataque2 <= 10:
+                    if ataque1 <= 20 or ataque2 <= 20:
                         print_slow(f"\n{inimigo} usou Enfraquecer")
                         print_slow(f"O ataque de {
                             jogador} não pode diminuir mais!")
