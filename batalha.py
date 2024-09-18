@@ -197,6 +197,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                 danoinimi = 65
                 poweratk -= 1
                 time.sleep(2)
+
         else:
             atkinimigo = random.randint(1, 4)
 
@@ -219,6 +220,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                             print_slow("Foi um dano crítico!")
                             danoinimi = 15 + (inimilvl/4) + danocritico
                             time.sleep(2)
+
                         else:
                             print_slow(f"\n{inimigo} usou Investida")
                             danoinimi = 15 + (inimilvl/4)
@@ -245,6 +247,7 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
                                 print_slow(f"\n{jogador} foi queimado!")
                                 burn = 1
                                 time.sleep(2)
+
                         else:
                             print_slow(f"\n{inimigo} usou Labaredas")
                             danoinimi = 20 + (inimilvl/4)
@@ -299,10 +302,14 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
             if level < 100:
                 global lvlpoints
                 lvlpoints += int(inimilvl*100)
-                if lvlpoints >= (lvl*100):
-                    level += 1
-                    print_slow(f"O seu nível aumentou! LVL {level}")
-                    lvlpoints = lvlpoints - (lvl*100)
+
+                while True:
+                    if lvlpoints >= (lvl*100):
+                        level += 1
+                        print_slow(f"O seu nível aumentou! LVL {level}")
+                        lvlpoints = lvlpoints - (lvl*100)
+                    else:
+                        break
             else:
                 print("Level máximo!")
 
