@@ -305,9 +305,9 @@ def batalha(jogador: str, inimigo: str, lvl, inimilvl, pocoes: int):
 
                 while True:
                     if lvlpoints >= (lvl*100):
+                        lvlpoints = lvlpoints - (lvl*100)
                         level += 1
                         print_slow(f"O seu nível aumentou! LVL {level}")
-                        lvlpoints = lvlpoints - (lvl*100)
                     else:
                         break
             else:
