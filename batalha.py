@@ -1,6 +1,4 @@
-import os
-import time
-import random
+import os, time, random
 
 level: int = 1
 lvlpoints: int = 0
